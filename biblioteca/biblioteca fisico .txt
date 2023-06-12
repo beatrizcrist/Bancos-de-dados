@@ -1,0 +1,58 @@
+/* biblioteca fisico */
+
+# create database if not exists biblioteca;
+
+CREATE TABLE tb_Livro (
+    pk_idLivro INTEGER PRIMARY KEY not null auto_increment,
+    titulo VARCHAR(60) not null,
+    autor VARCHAR(60) not null,
+    dataLancamento DATE not null,
+    generoLiterario VARCHAR(30) not null
+);
+
+CREATE TABLE tb_Funcionario (
+    pk_idFuncionario INTEGER PRIMARY KEY not null auto_increment,
+    Nome VARCHAR(60) not null,
+    salario FLOAT not null,
+    dataNascimento DATE not null,
+    tipoContrato VARCHAR(20) not null,
+    funcao VARCHAR(50) not null
+);
+
+CREATE TABLE tb_Leitor (
+    pk_idLeitor INTEGER PRIMARY KEY not null auto_increment,
+    nome VARCHAR(60) not null,
+    dataNascimento DATE not null,
+    endereco VARCHAR(50) not null,
+    telefone VARCHAR(10) not null,
+    historico VARCHAR(100) not null,
+    email VARCHAR(50) not null,
+    bairro VARCHAR(40) not null,
+    cep VARCHAR(10) not null,
+    numero VARCHAR(10) not null
+);
+
+CREATE TABLE tb_EmprestimoDeLivro (
+    pk_idEmprestimoDeLivro INTEGER PRIMARY KEY not null auto_increment,
+    dataEmprestimo DATE not null,
+    dataDevolucao DATE not null,
+    fk_tb_Livro_pk_idLivro INTEGER not null,
+    fk_tb_Leitor_pk_idLeitor INTEGER not null,
+    fk_tb_Funcionario_pk_idFuncionario INTEGER not null
+);
+ 
+ALTER TABLE tb_EmprestimoDeLivro ADD CONSTRAINT FK_tb_EmprestimoDeLivro_2
+    FOREIGN KEY (fk_tb_Livro_pk_idLivro)
+    REFERENCES tb_Livro (pk_idLivro)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tb_EmprestimoDeLivro ADD CONSTRAINT FK_tb_EmprestimoDeLivro_3
+    FOREIGN KEY (fk_tb_Leitor_pk_idLeitor)
+    REFERENCES tb_Leitor (pk_idLeitor)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tb_EmprestimoDeLivro ADD CONSTRAINT FK_tb_EmprestimoDeLivro_4
+    FOREIGN KEY (fk_tb_Funcionario_pk_idFuncionario)
+    REFERENCES tb_Funcionario (pk_idFuncionario)
+    ON DELETE RESTRICT;
+    
