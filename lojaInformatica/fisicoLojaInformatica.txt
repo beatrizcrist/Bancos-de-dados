@@ -1,0 +1,83 @@
+
+
+CREATE TABLE tb_Mouse (
+    especificacoes VARCHAR(100) not null,
+    peso FLOAT not null,
+    cor VARCHAR(30) not null,
+    dimensoes VARCHAR(30) not null,
+    modelo VARCHAR(60) UNIQUE not null,
+    numeroDeSerie VARCHAR(10) not null,
+    marca VARCHAR(40) not null,
+    conector VARCHAR(20) not null,
+    preco FLOAT not null,
+    quantidade INTEGER not null,
+    lote VARCHAR(10) not null,
+    DPI VARCHAR(30) not null,
+    sensor VARCHAR(30) not null,
+    material VARCHAR(30) not null,
+    garantia DATE not null,
+    pollingRate VARCHAR(30) not null,
+    pk_mouse INTEGER PRIMARY KEY not null auto_increment
+);
+
+CREATE TABLE tb_Teclado (
+    especificações VARCHAR(100) not null,
+    peso FLOAT not null,
+    cor VARCHAR(30) not null,
+    tamanho  VARCHAR(30) not null,
+    modelo VARCHAR(60) not null,
+    númeroSérie  VARCHAR(15) not null,
+    marca VARCHAR(40) not null,
+    conector VARCHAR(30) not null,
+    preço FLOAT not null,
+    quantidade INTEGER not null,
+    lote VARCHAR(10) not null,
+    tipoTeclado VARCHAR(20) not null,
+    material VARCHAR(30) not null,
+    frequencia VARCHAR(20) not null,
+    pk_teclado INTEGER PRIMARY KEY not null auto_increment,
+    UNIQUE (pk_teclado, modelo)
+);
+
+CREATE TABLE tb_MemoriaRAM (
+    pk_idMemoriaRAM INTEGER PRIMARY KEY not null auto_increment,
+    peso FLOAT not null,
+    modelo VARCHAR(30) not null,
+    numeroDeSerie VARCHAR(15) not null,
+    marca VARCHAR(30) not null,
+    tipoSlot VARCHAR(20) not null,
+    geracao VARCHAR(30) not null,
+    preco FLOAT not null,
+    lote VARCHAR(10) not null,
+    temperaturaOperacao FLOAT not null,
+    compatibilidade VARCHAR(30) not null,
+    garantia DATE not null,
+    tipo VARCHAR(30) not null,
+    MHZ VARCHAR(30) not null,
+    especificacoes VARCHAR(100) not null,
+    UNIQUE (modelo, pk_idMemoriaRAM)
+);
+
+CREATE TABLE tb_Notebook (
+    especificacoes VARCHAR(100) not null,
+    peso FLOAT not null,
+    cor VARCHAR(30) not null,
+    dimensoes VARCHAR(30) not null,
+    modelo VARCHAR(30) not null,
+    numeroDeSerie VARCHAR(15) not null,
+    marca VARCHAR(30) not null,
+    conector VARCHAR(30) not null,
+    lote VARCHAR(10) not null,
+    resolucaoTela VARCHAR(30) not null,
+    tamanhoTela VARCHAR(20) not null,
+    processador VARCHAR(30) not null,
+    memoriaRAM INTEGER not null,
+    armazenamento INTEGER not null,
+    camera INTEGER not null,
+    siistemaOperacional VARCHAR(20) not null,
+    teclado VARCHAR(30) not null,
+    audio VARCHAR(30) not null,
+    placaDeVideo VARCHAR(30) not null,
+    pk_IdNotebook INTEGER PRIMARY KEY not null auto_increment,
+    UNIQUE (pk_IdNotebook, modelo)
+);
