@@ -1,0 +1,50 @@
+# create database if not exists pizzaria;
+
+CREATE TABLE tb_Funcionario (
+    tipoFuncionario VARCHAR(30) not null,
+    tipoContrato VARCHAR(20) not null,
+    pk_IdFuncionario INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    horarioDeTrabalho VARCHAR(30) not null,
+    salario DOUBLE not null
+);
+
+CREATE TABLE tb_Cliente (
+    pk_IdCliente INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    nomeCliente VARCHAR(60) not null,
+    endereco VARCHAR(40) not null,
+    telefone VARCHAR(10) not null,
+    bairro VARCHAR(30) not null,
+    logradouro VARCHAR(30) not null,
+    numero SMALLINT not null
+);
+
+CREATE TABLE tb_Pizza (
+    pk_IdProduto INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    ingredientes VARCHAR(100) not null,
+    preco DOUBLE not null
+);
+
+CREATE TABLE tb_Pedido (
+    pk_IdPedido INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    dataPedido DATE not null,
+    formaPagamento VARCHAR(30) not null,
+    totalPagamento DOUBLE not null,
+    fk_tb_Funcionario_pk_IdFuncionario INTEGER not null,
+    fk_tb_Cliente_pk_IdCliente INTEGER not null,
+    fk_tb_Pizza_pk_IdProduto INTEGER not null
+);
+ 
+ALTER TABLE tb_Pedido ADD CONSTRAINT FK_tb_Pedido_2
+    FOREIGN KEY (fk_tb_Funcionario_pk_IdFuncionario)
+    REFERENCES tb_Funcionario (pk_IdFuncionario)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tb_Pedido ADD CONSTRAINT FK_tb_Pedido_3
+    FOREIGN KEY (fk_tb_Cliente_pk_IdCliente)
+    REFERENCES tb_Cliente (pk_IdCliente)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tb_Pedido ADD CONSTRAINT FK_tb_Pedido_4
+    FOREIGN KEY (fk_tb_Pizza_pk_IdProduto)
+    REFERENCES tb_Pizza (pk_IdProduto)
+    ON DELETE CASCADE;
