@@ -1,0 +1,58 @@
+# create database if not exists papelaria;
+
+CREATE TABLE tb_Produtos (
+    quantidade INTEGER not null,
+    preco DOUBLE not null,
+    marca VARCHAR(30) not null,
+    lote VARCHAR(30) not null,
+    nome VARCHAR(60) not null,
+    descricao VARCHAR(100) not null,
+    PK_produtos INTEGER PRIMARY KEY auto_increment not null,
+    fornecedor VARCHAR(30) not null,
+    UNIQUE (PK_produtos, nome)
+);
+
+CREATE TABLE tb_Cliente (
+    nome VARCHAR(60) not null,
+    PK_Cliente INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    email VARCHAR(40) not null,
+    telefone VARCHAR(15) not null,
+    endereco VARCHAR(40) not null,
+    bairro VARCHAR(30) not null,
+    logradouro VARCHAR(30) not null,
+    numero SMALLINT not null
+);
+
+CREATE TABLE tb_Funcionario (
+    PK_funcionario INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    data_Nascimento DATE not null,
+    telefone VARCHAR(15) not null,
+    salario DOUBLE not null,
+    tipoContrato VARCHAR(30) not null,
+    funcao VARCHAR(100) not null
+);
+
+CREATE TABLE tb_Compra (
+    pk_IdCompra INTEGER PRIMARY KEY UNIQUE auto_increment not null,
+    dataCompra DATE not null,
+    formaPagamento VARCHAR(30) not null,
+    totalPagamento DOUBLE not null,
+    fk_tb_Cliente_PK_Cliente INTEGER not null,
+    fk_tb_Funcionario_PK_funcionario INTEGER not null,
+    fk_tb_Produtos_PK_produtos INTEGER not null
+);
+ 
+ALTER TABLE tb_Compra ADD CONSTRAINT FK_tb_Compra_2
+    FOREIGN KEY (fk_tb_Cliente_PK_Cliente)
+    REFERENCES tb_Cliente (PK_Cliente)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tb_Compra ADD CONSTRAINT FK_tb_Compra_3
+    FOREIGN KEY (fk_tb_Funcionario_PK_funcionario)
+    REFERENCES tb_Funcionario (PK_funcionario)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tb_Compra ADD CONSTRAINT FK_tb_Compra_4
+    FOREIGN KEY (fk_tb_Produtos_PK_produtos)
+    REFERENCES tb_Produtos (PK_produtos)
+    ON DELETE RESTRICT;
